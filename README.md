@@ -1,3 +1,23 @@
+---
+title: OASIS Engineering Data Management
+description: An AI-native approach to engineering data management built on the Open Knowledge Format (OKF) — open, simple and interoperable
+type: concept
+domain: engineering-data-management
+tags:
+  - edm
+  - ai-native
+  - open-knowledge-format
+  - digital-thread
+  - digital-twin
+  - data-lakehouse
+resources:
+  - path: OASIS-EDM-hero.png
+    type: image
+    description: Hero banner for OASIS EDM
+  - path: logos/
+    type: directory
+    description: Tool logos used across concept files
+---
 
 <p align="center">
   <img src="OASIS-EDM-hero.png" alt="OASIS-EDM Hero" width="100%"/>
@@ -26,7 +46,6 @@ It is time to re-build the engineering data stack with AI-native primitives. Thi
 - **Simple**: Because OKF is just markdown with a few conventions, you can build your first knowledge bundle in less than an hour.
 - **Interopable**: Because the data structures can ingest, enrich or just link to resources in existing systems, it can work alongside existing EDM infrastructure.
 - **Scalable**: Not only can OKF link to tables that contain PBs of data, but OKFs can also link together to a company-wide knowledge graph.
-
 
 This repos serves as an introduction and curated lists regarding tooling, datasets and best practices for ‚OKF-based engineering data management.
 
@@ -77,65 +96,19 @@ It also makes sense to extract data from source documents and enrich it to facil
 
 # 🔧 Tooling for data extraction and enrichment
 
-## 📈 Time series data
+- 📈 [Time Series Data Tools](tools/time-series-data.md) — MDF, TDMS, CAN bus signal extraction
+- 🏎️ [CAX Data Tools](tools/cax-data.md) — CAD geometry, CAE simulation result processing
 
-| Logo | Name | Description | License |
-|------|------|-------------|---------|
-| <img src="logos/asammdf.png" width="40"/> | [asammdf](https://github.com/danielhrisca/asammdf) | Parses automotive MDF data into DataFrames and Parquet files | LGPL-3.0 |
-| <img src="logos/generic-tool.svg" width="40"/> | [cantools](https://github.com/cantools/cantools) | Decodes and encodes CAN/LIN/J1939 bus signals from DBC, KCD and ARXML databases | MIT |
-| <img src="logos/generic-tool.svg" width="40"/> | [npTDMS](https://github.com/adamreeve/npTDMS) | NumPy-based Python module for reading TDMS files produced by LabVIEW, Diadem and other NI products | LGPL-3.0 |
-
-## 🏎️ CAX data
-
-| Logo | Name | Description | License |
-|------|------|-------------|---------|
-| <img src="logos/lasso.png" width="40"/> | [Lasso](https://github.com/open-lasso-python/lasso-python) | Toolkit for processing CAE (crash, NVH) simulation results including D3plot, Binout and FEMZIP | BSD-3-Clause |
-| <img src="logos/opencascade.png" width="40"/> | [OpenCASCADE](https://dev.opencascade.org/) | Open-source CAD/CAM/CAE kernel for 3D modeling, STEP/IGES import/export and geometric computation | LGPL-2.1 |
 
 # 🗄️ Tooling for data storage and analysis
 
 In this section, we exemplary list the most important tools for each category. Please consult an AI assistant of your choice to get a more extensive overview over the ecosystem.
 
-## 🧊 Lakehouses
+- 🧊 [Lakehouse Formats](tools/lakehouses.md) — Iceberg, Delta Lake, DuckLake
+- 🔍 [Query Engines](tools/query-engines.md) — Spark, DuckDB, StarRocks, BigQuery, Athena
+- 📚 [Data Catalogues](tools/data-catalogues.md) — Unity Catalog, Polaris, Nessie
+- 🏷️ [Metadata Management & Data Lineage](tools/metadata-management.md) — DataHub, OpenMetadata, Collibra, Atlan
 
-Open table formats that bring ACID transactions, schema evolution and time-travel to data lakes — turning cheap object storage into a full data lakehouse.
-
-| Logo | Name | Description | License |
-|------|------|-------------|---------|
-| <img src="logos/iceberg.svg" width="40"/> | [Apache Iceberg](https://iceberg.apache.org/) | Open table format for huge analytic datasets with schema evolution, partition evolution, hidden partitioning and time-travel queries. De-facto standard for modern lakehouses. | Apache 2.0 |
-| <img src="logos/delta-lake.svg" width="40"/> | [Delta Lake](https://delta.io/) | Open storage layer that brings ACID transactions to data lakes. Originally created by Databricks, now widely adopted including in Microsoft Fabric. Supports merge, schema enforcement and time-travel via transaction logs. | Apache 2.0 |
-| <img src="logos/ducklake.svg" width="40"/> | [DuckLake](https://github.com/duckdb/ducklake) | Lightweight lakehouse catalog that stores metadata in a DuckDB (or PostgreSQL/MySQL) database while data lives in Parquet on object storage. Combines simplicity of a database catalog with lakehouse scalability. | MIT |
-
-## 🔍 Query engines
-
-Analytical query engines that can read directly from lakehouse tables and Parquet files — enabling fast interactive analytics on engineering data without ETL.
-
-| Logo | Name | Description | License |
-|------|------|-------------|---------|
-| <img src="logos/spark.png" width="40"/> | [Apache Spark](https://spark.apache.org/) | Unified engine for large-scale batch and streaming data processing. Industry standard for ETL pipelines and distributed analytics on lakehouse data. | Apache 2.0 |
-| <img src="logos/duckdb.png" width="40"/> | [DuckDB](https://duckdb.org/) | In-process OLAP database with zero external dependencies. Reads Parquet, CSV, JSON and Iceberg/Delta directly. Ideal for local engineering data exploration. | MIT |
-| <img src="logos/starrocks.svg" width="40"/> | [StarRocks](https://www.starrocks.io/) | High-performance MPP analytical database for real-time and batch analytics. Supports external catalogs for Iceberg and Delta Lake federation. | Apache 2.0 |
-| <img src="logos/bigquery.png" width="40"/> | [BigQuery](https://cloud.google.com/bigquery) | Google's fully managed, serverless data warehouse with built-in ML and BI. Supports Iceberg tables and external data lake connections. | Proprietary |
-| <img src="logos/athena.png" width="40"/> | [Amazon Athena](https://aws.amazon.com/athena/) | Serverless query service that analyzes data in S3 using SQL. Native support for Parquet, Iceberg and other open formats with pay-per-query pricing. | Proprietary |
-
-## 📚 Data catalogues
-
-| Logo | Name | Description | License |
-|------|------|-------------|---------|
-| <img src="logos/unity-catalog.png" width="40"/> | [Unity Catalog](https://www.unitycatalog.io/) | Open-source universal catalog for data and AI assets. Provides governance, access control and lineage across lakehouses and ML models. | Apache 2.0 |
-| <img src="logos/polaris.svg" width="48"/> | [Apache Polaris](https://polaris.apache.org/) | Open-source catalog for Apache Iceberg. Provides a REST-based catalog interface with multi-engine access, role-based access control and credential vending. | Apache 2.0 |
-| <img src="logos/nessie.svg" width="40"/> | [Project Nessie](https://projectnessie.org/) | Git-like version control for data lakes. Provides branching, tagging and commits for Iceberg tables enabling isolated experimentation and reproducibility. | Apache 2.0 |
-
-## 🏷️ Metadata management & data lineage
-
-Tools for cataloging datasets, tracking lineage and providing a semantic layer on top of raw engineering data.
-
-| Logo | Name | Description | License |
-|------|------|-------------|---------|
-| <img src="logos/datahub.svg" width="40"/> | [DataHub](https://datahubproject.io/) | Extensible metadata platform for data discovery, observability, and governance. Supports automated lineage and integrations with most lakehouse engines. | Apache 2.0 |
-| <img src="logos/openmetadata.png" width="40"/> | [OpenMetadata](https://open-metadata.org/) | End-to-end metadata management platform with data discovery, lineage, quality, profiling and collaboration. Supports connectors for 50+ data services. | Apache 2.0 |
-| <img src="logos/collibra.png" width="40"/> | [Collibra](https://www.collibra.com/) | Enterprise data intelligence platform providing data cataloging, governance, lineage and quality management at scale. Industry leader for regulated environments. | Proprietary |
-| <img src="logos/atlan.png" width="40"/> | [Atlan](https://atlan.com/) | Active metadata platform with embedded collaboration, automated lineage and AI-powered search. Designed for modern data teams with a developer-first approach. | Proprietary |
 
 # 📦 Example datasets
 
@@ -166,9 +139,3 @@ Short answer: No. Longer answer: The current generation of enterprise data manag
 There is a big difference between generally describing insights and facts for future use and presenting such content in a limited amount of time for a specific audience (e.g. speech, status meeting). PowerPoint is a great tool for the latter, but is heavily misused for the former.
 Example: For a scientific conference you would hand in a paper written in LateX (general description of content) and then might do your presentation slides in PP. 
 With agents, this paradigm will get even more important. You should describe all the facts and insights in markdown. Then you can push a button and get a tailored presentation (or even a video) for your stakeholders. So: You can still do PowerPoint reports, but only as a presentation output and not as a source of truth for facts and insights!
-
-
-
-
-
-
