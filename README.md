@@ -24,7 +24,7 @@ resources:
 </p>
 
 
-# ⚠️ Challenges in engineering data management
+# Challenges in engineering data management
 
 Engineering Data Management (EDM) means to capture, store, version, analyze and distribute all data that arise during the lifecycle of a product. For complex electro-mechanical products EDM is a very hard problem spanning many disciplines and systems: CAD models of the product might be stored in the PLM system, simulation data in SDM/SPDM, test in data in the test data management system, the BOM in the ERP system, production data in MES and operational data in an IOT database. And this list is just a tiny fraction of the real world complexity (automotive OEMs have hundreds of different systems). 
 
@@ -35,22 +35,22 @@ We talked a lot about the digital thread and digital twins over the last decade.
 - Take design decisions on manufacturability from real production data
 
 
-# 🤖 A new AI native stack for engineering data management
+# A new AI native stack for engineering data management
 
 Agentic AI promises to break the data silos and finally empower engineers to see things end-to-end again. However, results with AI assistants have been mixed so far: Give an AI assistant a folder with documents and tables and ask a complex questions and the results are nearly magical. But using agentic AI systems on top of legacy data infrastructure quickly falls of a cliff (if it is possible at all).
 
 It is time to re-build the engineering data stack with AI-native primitives. This repo presents a new approach to EDM built on the open knowledge format (OKF) (link here). Markdown with structured frontmatter is used to describe concepts that can link to each other. Concepts can reference exernal resources (e.g. tables for structured data or native files for images, geometry) where necessary. The resulting data structure is (an) OASIS:
 
-- **Open**: Not only are all formats completely open, but there proven open-source tools exist for storing, querying and editing the data.
-- **AI-native**: By putting OKF bundles in a database, AI agents can efficiently search for information through the resulting knowledge graph, content embeddings and structured frontmatter information.
-- **Simple**: Because OKF is just markdown with a few conventions, you can build your first knowledge bundle in less than an hour.
-- **Interopable**: Because the data structures can ingest, enrich or just link to resources in existing systems, it can work alongside existing EDM infrastructure.
-- **Scalable**: Not only can OKF link to tables that contain PBs of data, but OKFs can also link together to a company-wide knowledge graph.
+- **Open**: Every layer uses open formats (Markdown, Parquet, Iceberg) and proven open-source tools (DuckDB, Git). No vendor lock-in — your data stays readable and portable.
+- **AI-native**: Structured frontmatter gives AI agents queryable metadata. Markdown content enables semantic search. Links between concepts form a knowledge graph. An agent can find "all crash test results for the B-pillar across 3 design iterations" in seconds — across data from different systems.
+- **Simple**: An OKF concept is just a markdown file with a YAML header. You can create your first knowledge bundle with a text editor in under an hour — no new tooling, no training.
+- **Interoperable**: OKF concepts link to resources in existing systems (PLM, ERP, test databases) rather than replacing them. You get a unified view without migrating a single dataset.
+- **Scalable**: A single concept can reference Parquet tables with billions of rows. Concepts link to each other across teams and departments, growing into a company-wide knowledge graph.
 
 This repos serves as an introduction and curated lists regarding tooling, datasets and best practices for ‚OKF-based engineering data management.
 
 
-# 🙌 Why should you care and how can you contribute?
+# Why should you care and how can you contribute?
 
 It is only day 1 for building AI in engineering. If you feel the pain of broken engineering data infrastructure yourself or are passionated about giving agency back to engineers, then please help. 
 
@@ -61,7 +61,7 @@ Here are some things you could do:
 - Please create a PR if you feel an important tool is missing from the list.
 
 
-# ⚙️ How it works
+# How it works
 
 
 ## 📄 Open Knowledge Format (OKF)
@@ -94,23 +94,7 @@ It also makes sense to extract data from source documents and enrich it to facil
 - Comparison of two CAE models in terms of parameters and KPIs
 
 
-# 🔧 Tooling for data extraction and enrichment
-
-- 📈 [Time Series Data Tools](tools/time-series-data.md) — MDF, TDMS, CAN bus signal extraction
-- 🏎️ [CAX Data Tools](tools/cax-data.md) — CAD geometry, CAE simulation result processing
-
-
-# 🗄️ Tooling for data storage and analysis
-
-In this section, we exemplary list the most important tools for each category. Please consult an AI assistant of your choice to get a more extensive overview over the ecosystem.
-
-- 🧊 [Lakehouse Formats](tools/lakehouses.md) — Iceberg, Delta Lake, DuckLake
-- 🔍 [Query Engines](tools/query-engines.md) — Spark, DuckDB, StarRocks, BigQuery, Athena
-- 📚 [Data Catalogues](tools/data-catalogues.md) — Unity Catalog, Polaris, Nessie
-- 🏷️ [Metadata Management & Data Lineage](tools/metadata-management.md) — DataHub, OpenMetadata, Collibra, Atlan
-
-
-# 📦 Example datasets
+# Use cases including datasets
 
 ## 📏 Testing data
 
@@ -118,11 +102,23 @@ In this section, we exemplary list the most important tools for each category. P
 
 ## 🏭 Production data
 
-- **[Industrial Asset Level Electrical Energy Dataset](https://huggingface.co/datasets/renumics/industrial-asset-level-electrical-energy-dataset)** provides 15-minute energy aggregates from an industrial manufacturing facility in Ireland. The source dataset covers 43 monitored assets over ~12 months (2024-12-31 to 2025-12-31).
+Now: Data analysts are writing Grafana dashboards for each problem. Additional knowledge such as shift plans, machine information, plant layouts are pulled from PDF, Excel or individual human knowledge. It takes days to answer questions on production data.
+
+Future: Production data is stored in a lakehouse and all relevant information (e.g. shift plans, machine descriptions, produced products) are stored as OKF. AI agents can answer questions on the production data in minutes.
+
+Typical questions:
+- Why was my energy bill higher in April?
+- Analyze the efficiency of all injection moulding machines. Are there significant differences? 
+- Analyze utilization and create a report for April.
+
+Example Datasets:
+
+- **[Industrial Asset Level Electrical Energy Dataset](https://huggingface.co/datasets/renumics/industrial-asset-level-electrical-energy-dataset)** — 15-minute energy aggregates from 43 monitored assets in an industrial manufacturing facility in Ireland, covering ~12 months (2024-12-31 to 2025-12-31).
+
 
 ## 💻 Simulation data
 
-# ❓ Frequently asked questions
+# Frequently asked questions
 
 ## What is an engineering data analytics layer?
 
@@ -139,3 +135,20 @@ Short answer: No. Longer answer: The current generation of enterprise data manag
 There is a big difference between generally describing insights and facts for future use and presenting such content in a limited amount of time for a specific audience (e.g. speech, status meeting). PowerPoint is a great tool for the latter, but is heavily misused for the former.
 Example: For a scientific conference you would hand in a paper written in LateX (general description of content) and then might do your presentation slides in PP. 
 With agents, this paradigm will get even more important. You should describe all the facts and insights in markdown. Then you can push a button and get a tailored presentation (or even a video) for your stakeholders. So: You can still do PowerPoint reports, but only as a presentation output and not as a source of truth for facts and insights!
+
+# Tools to extract, enrich, manage and analyze engineering data
+
+## ⛏️ Tooling for data extraction and enrichment
+
+- 📈 [Time Series Data Tools](tools/time-series-data.md) — MDF, TDMS, CAN bus signal extraction
+- 🏎️ [CAX Data Tools](tools/cax-data.md) — CAD geometry, CAE simulation result processing
+
+
+## 🗄️ Tooling for data storage and analysis
+
+In this section, we exemplary list the most important tools for each category. Please consult an AI assistant of your choice to get a more extensive overview over the ecosystem.
+
+- 🧊 [Lakehouse Formats](tools/lakehouses.md) — Iceberg, Delta Lake, DuckLake
+- 🔍 [Query Engines](tools/query-engines.md) — Spark, DuckDB, StarRocks, BigQuery, Athena
+- 📚 [Data Catalogues](tools/data-catalogues.md) — Unity Catalog, Polaris, Nessie
+- 🏷️ [Metadata Management & Data Lineage](tools/metadata-management.md) — DataHub, OpenMetadata, Collibra, Atlan
