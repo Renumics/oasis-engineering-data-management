@@ -47,7 +47,7 @@ Here are some things you could do:
 
 The foundational primitive of the concept are markdown files that are stored in a folder structure. Each markdown file also carries a YAML-block with structured metadata information which is called [frontmatter](https://jekyllrb.com/docs/front-matter/). These text-based folder structures can be versioned an managed in existing systems such as [GIT](https://git-scm.com/).
 
-This basic structure was popularized as [LLM-Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) and formalized into a minimal spec by Google under the term [Open Knowledge Format](https://github.com/google/open-knowledge-format). We won't repeat the full spec here, but only highlight the most important aspects:
+This basic structure was popularized as [LLM-Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) and formalized into a minimal spec by Google under the term [Open Knowledge Format](https://github.com/GoogleCloudPlatform/open-knowledge-format). We won't repeat the full spec here, but only highlight the most important aspects:
 
 1. Each markdown contains exactly one Concept
 2. Concepts can link together to other concepts creating a knowledge graph
